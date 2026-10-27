@@ -1,0 +1,365 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body><title>Architecture Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style id="site-css">
+/* Layout: drawing-sheet portfolio. Thin rules, mono title-block captions, image-led grid. */
+:root{
+  --bg:#f2f3f3; --panel:#e7e9e9; --ink:#15181a; --muted:#5d6468; --line:#c6cbcd; --accent:#d23a22; --accent-ink:#ffffff;
+  --display:'Jost',system-ui,sans-serif; --body:'Karla',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111314;--panel:#1b1e1f;--ink:#e9ebeb;--muted:#9aa2a6;--line:#363b3e;--accent:#ff6a4d;--accent-ink:#111314;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111314;--panel:#1b1e1f;--ink:#e9ebeb;--muted:#9aa2a6;--line:#363b3e;--accent:#ff6a4d;--accent-ink:#111314;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1280px;margin:0 auto}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{font-family:var(--display);font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:none;border:0;padding:0}
+.nav{display:flex;gap:22px;align-items:center}
+.nav button{background:none;border:0;padding:4px 0;font-family:var(--display);letter-spacing:.12em;text-transform:uppercase;font-size:13px;border-bottom:1px solid transparent}
+.nav button:hover{border-color:var(--ink)}
+.nav .edit-btn{border:1px solid var(--ink);padding:5px 12px;letter-spacing:.08em}
+.nav .edit-btn:hover{background:var(--ink);color:var(--bg)}
+.hero{padding-block:clamp(56px,10vw,128px) clamp(40px,6vw,72px);border-bottom:1px solid var(--line)}
+.kicker{font:12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:300;font-size:clamp(44px,9vw,120px);line-height:1;letter-spacing:.02em;margin:18px 0 18px;text-wrap:balance;overflow-wrap:anywhere}
+.tag{font-size:clamp(17px,2vw,21px);color:var(--muted);max-width:52ch;margin:0}
+section{padding-block:clamp(40px,6vw,80px)}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:1px solid var(--ink);padding-bottom:10px;margin-bottom:28px}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(22px,3vw,30px);letter-spacing:.1em;text-transform:uppercase;margin:0}
+.count{font:13px var(--mono);color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 24px}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.grid{grid-template-columns:minmax(0,1fr)}.nav{gap:16px}}
+.tile{min-width:0}
+.frame{position:relative;aspect-ratio:4/3;background:var(--panel);overflow:hidden;cursor:pointer;border:1px solid var(--line)}
+.frame img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.tile:hover .frame img{transform:scale(1.035)}
+.ph{width:100%;height:100%;display:grid;place-items:center;font:12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:repeating-linear-gradient(135deg,transparent 0 11px,var(--line) 11px 12px)}
+.cap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 12px;padding-top:12px}
+.cap .no{font:13px var(--mono);color:var(--accent);grid-row:span 2;padding-top:3px}
+.cap .t{font-family:var(--display);font-size:20px;font-weight:500;line-height:1.25;overflow-wrap:anywhere}
+.cap .m{font:12px var(--mono);color:var(--muted);letter-spacing:.04em;overflow-wrap:anywhere}
+.about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,72px);align-items:start}
+@media (max-width:760px){.about{grid-template-columns:minmax(0,1fr)}}
+.portrait{position:relative;aspect-ratio:4/5;background:var(--panel);border:1px solid var(--line);overflow:hidden}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.about p{margin:0 0 1.1em;max-width:62ch;overflow-wrap:anywhere}
+.facts{margin:32px 0 0;border-top:1px solid var(--line)}
+.facts div{display:grid;grid-template-columns:minmax(0,140px) minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.facts dt{font:12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.facts dd{margin:0;overflow-wrap:anywhere}
+.foot{border-top:1px solid var(--line);padding-block:28px 40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font:12px var(--mono);color:var(--muted);letter-spacing:.06em}
+/* project view */
+.back{background:none;border:0;padding:0;font:13px var(--mono);letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--ink)}
+.pv-head{padding-block:40px 28px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px 48px}
+@media (max-width:760px){.pv-head{grid-template-columns:minmax(0,1fr)}}
+.pv-head h1{font-size:clamp(34px,6vw,72px);margin:12px 0 0}
+.pv-head p{margin:0;max-width:60ch;white-space:pre-line;overflow-wrap:anywhere}
+.figs{display:grid;gap:28px;padding-block:32px}
+.fig img{width:100%;height:auto;display:block;border:1px solid var(--line);background:var(--panel)}
+.fig .fc{display:flex;gap:12px;justify-content:space-between;align-items:center;padding-top:8px;font:12px var(--mono);color:var(--muted);letter-spacing:.06em}
+.pager{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--ink);padding-block:20px 8px}
+.pager button{background:none;border:0;font-family:var(--display);letter-spacing:.1em;text-transform:uppercase;font-size:14px;padding:4px 0;text-align:left;min-width:0}
+.pager button:hover{color:var(--accent)}
+.empty{padding:48px 0;color:var(--muted);font:14px var(--mono)}
+.docs{display:grid;gap:16px;padding-block:28px 4px;border-bottom:1px solid var(--line)}
+.doc{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;padding:18px;background:var(--panel);border:1px solid var(--line)}
+.doc-ic{font:12px var(--mono);letter-spacing:.1em;color:var(--accent);border:1px solid var(--accent);height:max-content;padding:6px 8px}
+.doc-t{font-family:var(--display);font-size:22px;font-weight:500;line-height:1.25;overflow-wrap:anywhere}
+.doc p{margin:6px 0 0;max-width:62ch;white-space:pre-line;overflow-wrap:anywhere}
+.open-pdf{display:inline-block;font:13px var(--mono);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--accent-ink);background:var(--accent);padding:8px 14px;margin-top:10px}
+.open-pdf:hover{opacity:.85}
+.doc .tools{align-items:center}
+button.open-pdf{border:0;cursor:pointer}
+.reader{position:fixed;inset:0;z-index:60;background:var(--bg);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+.reader-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line)}
+.reader-t{font:13px var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.reader-body{flex:1;overflow:auto;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;align-items:center;gap:16px;background:var(--panel)}
+.pdf-page{background:#fff;border:1px solid var(--line);display:block}
+/* editing */
+[contenteditable]{outline:1px dashed var(--accent);outline-offset:4px;min-width:1ch;cursor:text}
+[contenteditable]:empty::before{content:attr(data-ph);color:var(--muted)}
+textarea,.edit-in{width:100%;font:inherit;color:inherit;background:var(--panel);border:1px dashed var(--accent);padding:12px;resize:vertical;min-height:140px;line-height:1.6}
+.tools{display:flex;flex-wrap:wrap;gap:6px;padding-top:10px}
+.sm{font:12px var(--mono);letter-spacing:.04em;background:var(--panel);border:1px solid var(--line);padding:5px 9px;color:var(--ink)}
+.sm:hover{border-color:var(--ink)}
+.sm.danger[data-armed="1"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.add{display:grid;place-items:center;min-height:120px;border:1px dashed var(--accent);background:none;color:var(--accent);font:13px var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:24px;width:100%}
+.add:hover{background:var(--panel)}
+.over{position:absolute;right:10px;bottom:10px}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--ink);color:var(--bg);display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.bar span{font:12px var(--mono);letter-spacing:.06em}
+.bar button{font:13px var(--mono);letter-spacing:.06em;padding:8px 14px;border:1px solid var(--bg);background:none;color:var(--bg)}
+.bar button.go{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.bar button:disabled{opacity:.5;cursor:default}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(76px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);font:13px var(--mono);padding:10px 14px;z-index:50;max-width:calc(100vw - 32px)}
+body.is-editing{padding-bottom:84px}
+@media (prefers-reduced-motion:reduce){.frame img{transition:none}}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Karla:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap">
+<div id="app"></div>
+<input type="file" id="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+<script type="application/json" id="site-data">{"name":"Miles Densmore","tagline":"Architectural design portfolio. ","aboutImg":"","about":"I'm Miles Densmore, I have one semester of architectural design experience in highschool.","details":[{"k":"Studio","v":"Architectural Design 2026"},{"k":"School","v":"The Woodstock Academy"}],"projects":[{"id":"p1","title":"Architectural Models","type":"Architectural Models","year":"2026","desc":"The First 3 images are of my tiny home model made in Styrofoam ","cover":"3e84db059db5b60ca2a30f9a3dc70167","images":["3e84db059db5b60ca2a30f9a3dc70167","7e9148c5bd80b0b60d036aa812e389ca","c488a963b700b6e2a97699eef78b8064"],"docs":[]},{"id":"p2","title":"Architectural Drawings/Plans","type":"drawings and plans","year":"2026","desc":"The first 7 images are my final drawings and plans for my tiny home project.","cover":"4fda93091e9edf951d25f7e3ffc20dd8","images":["4fda93091e9edf951d25f7e3ffc20dd8","3caa586a9a58bb50acebee3d557b2b6b","42928b832af36ba31f80e05cba788054","f94072854bc323e50403cee5e4e78659","42fd851cc5647ca4b08f062bf2a82f59","c390f69126837f778e52b274a3eb0faa","7d3cca1d792700b7a44ec17dae01cd4a"],"docs":[]},{"id":"p3","title":"Class Assignments","type":"Class Assignments","year":"2026","desc":"","cover":"8a2733fc66ad0c30b995f5949a81f36a","images":["8a2733fc66ad0c30b995f5949a81f36a"],"docs":[{"id":"4eb1b9a6f1497169a825200300dbadcf","title":"Job Research 8-26","desc":"This was the first architectural research assignment that I completed."},{"id":"7e7386f59aaced1c6c5432003d0166b5","title":"Famous Architect MD - 9-3-26","desc":"In This assignment I researched the famous architect Frank Gehry"},{"id":"15a4469c4abc22a5fa097f41a9f0af3e","title":"chapters 1-4","desc":"These are my notes for chapters 1-4 of my architectural design class"},{"id":"7b513feecbe33090a90c044d08c3879d","title":"Architecture chapter review","desc":"Chapter review notes"},{"id":"3f14cf2c71d777bd8a874d0c72527783","title":"Architectural Models For a Tiny Home","desc":"This assignment acted as my initial research into tiny homes"}]}]}</script>
+<script id="app-js">
+(function(){
+var TITLE='Architecture Portfolio';
+var DEFAULT_RESET=':root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}';
+var S=JSON.parse(document.getElementById('site-data').textContent);
+var ORIG=JSON.stringify(S);
+var app=document.getElementById('app');
+var fileIn=document.getElementById('file');
+var canEdit=false, editing=false, dirty=false, saving=false, view=null;
+var api={artifact:null,assets:null};
+try{ if(sessionStorage.getItem('pf-edit')==='1'){ editing=true; } }catch(e){}
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function src(id){return id?'/_blob/'+id:'';}
+function pad(n){return (n<10?'0':'')+n;}
+function find(id){for(var i=0;i<S.projects.length;i++){if(S.projects[i].id===id)return i;}return -1;}
+function coverOf(p){return p.cover||(p.images&&p.images[0])||'';}
+function toast(m){var t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(function(){t.remove();},3200);}
+function mark(){dirty=true;var b=document.getElementById('savebtn');if(b)b.disabled=false;var s=document.getElementById('savestate');if(s)s.textContent='Unsaved changes';}
+function uid(){return 'p'+Date.now().toString(36)+Math.floor(Math.random()*1e4).toString(36);}
+
+function editable(text,f,ph,extra){return '<span contenteditable="plaintext-only" data-f="'+f+'" data-ph="'+esc(ph)+'" '+(extra||'')+'>'+esc(text)+'</span>';}
+function imgOrPh(id,label){return id?'<img src="'+esc(src(id))+'" alt="" decoding="async">':'<div class="ph">'+esc(label||'No image yet')+'</div>';}
+
+function renderHome(){
+  var h='';
+  h+='<header class="top"><button class="brand" data-act="top">'+esc(S.name)+'</button><nav class="nav" aria-label="Sections"><button data-act="nav" data-to="projects">Projects</button><button data-act="nav" data-to="about">About</button>'+(canEdit&&!editing?'<button class="edit-btn" data-act="edit-on">Edit page</button>':'')+'</nav></header>';
+  h+='<main><div class="hero"><div class="kicker">Architecture portfolio</div><h1>'+(editing?editable(S.name,'name','Your name'):esc(S.name))+'</h1><p class="tag">'+(editing?editable(S.tagline,'tagline','A line about your work'):esc(S.tagline))+'</p></div>';
+  h+='<section id="projects"><div class="sec-head"><h2>Projects</h2><span class="count">'+pad(S.projects.length)+' works</span></div><div class="grid">';
+  S.projects.forEach(function(p,i){
+    h+='<article class="tile"><div class="frame" data-act="open" data-id="'+p.id+'" role="button" tabindex="0" aria-label="Open '+esc(p.title)+'">'+imgOrPh(coverOf(p),'Project '+pad(i+1))+'</div>';
+    h+='<div class="cap"><span class="no">'+pad(i+1)+'</span><span class="t">'+esc(p.title)+'</span><span class="m">'+esc([p.type,p.year].filter(Boolean).join('  /  '))+'</span></div>';
+    if(editing){h+='<div class="tools"><button class="sm" data-act="mv" data-id="'+p.id+'" data-d="-1">Earlier</button><button class="sm" data-act="mv" data-id="'+p.id+'" data-d="1">Later</button><button class="sm" data-act="cover" data-id="'+p.id+'">Cover image</button><button class="sm" data-act="open" data-id="'+p.id+'">Edit project</button><button class="sm danger" data-act="del" data-id="'+p.id+'">Delete</button></div>';}
+    h+='</article>';
+  });
+  if(editing){h+='<article class="tile"><button class="add" data-act="add-project">+ Add project</button></article>';}
+  h+='</div>';
+  if(!S.projects.length){h+='<div class="empty">No projects yet.</div>';}
+  h+='</section>';
+  h+='<section id="about"><div class="sec-head"><h2>About</h2></div><div class="about"><div><div class="portrait">'+imgOrPh(S.aboutImg,'Portrait')+(editing?'<button class="sm over" data-act="about-img">Replace image</button>':'')+'</div></div><div>';
+  if(editing){h+='<textarea id="about-ta" data-f="about" rows="9" aria-label="About text">'+esc(S.about)+'</textarea>';}
+  else{S.about.split(/\n\s*\n/).forEach(function(par){if(par.trim())h+='<p>'+esc(par.trim())+'</p>';});}
+  h+='<dl class="facts">';
+  S.details.forEach(function(d,i){
+    h+='<div><dt>'+(editing?editable(d.k,'d:'+i+':k','Label'):esc(d.k))+'</dt><dd>'+(editing?editable(d.v,'d:'+i+':v','Details')+' <button class="sm" data-act="rm-detail" data-i="'+i+'">Remove</button>':esc(d.v))+'</dd></div>';
+  });
+  h+='</dl>';
+  if(editing){h+='<div class="tools"><button class="sm" data-act="add-detail">+ Add line</button></div>';}
+  h+='</div></div></section></main>';
+  h+='<footer class="foot"><span>'+esc(S.name)+'</span><span>'+new Date().getFullYear()+'</span></footer>';
+  return h;
+}
+
+function loadScript(u){return new Promise(function(res,rej){var s=document.createElement('script');s.src=u;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
+var pdfReady=null;
+function loadPdfJs(){if(!pdfReady){var B='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/';pdfReady=loadScript(B+'pdf.worker.min.js').then(function(){return loadScript(B+'pdf.min.js');}).catch(function(e){pdfReady=null;throw e;});}return pdfReady;}
+function closeReader(){var r=document.getElementById('reader');if(r)r.remove();document.body.style.overflow='';}
+function openReader(id,title){
+  closeReader();
+  var r=document.createElement('div');r.id='reader';r.className='reader';
+  r.innerHTML='<div class="reader-bar"><span class="reader-t"></span><button class="sm" data-act="close-reader">Close</button></div><div class="reader-body"><div class="empty">Loading PDF...</div></div>';
+  r.querySelector('.reader-t').textContent=title||'PDF';
+  document.body.appendChild(r);document.body.style.overflow='hidden';
+  var body=r.querySelector('.reader-body');
+  Promise.all([loadPdfJs(),fetch('/_blob/'+id).then(function(x){if(!x.ok)throw new Error('fetch');return x.arrayBuffer();})]).then(function(a){
+    return window.pdfjsLib.getDocument({data:a[1]}).promise;
+  }).then(function(pdf){
+    body.innerHTML='';
+    var w=Math.max(200,Math.min(body.clientWidth-32,1100));
+    var chain=Promise.resolve();
+    function add(n){chain=chain.then(function(){return pdf.getPage(n).then(function(pg){
+      var sc=w/pg.getViewport({scale:1}).width,dpr=window.devicePixelRatio||1,vp=pg.getViewport({scale:sc*dpr});
+      var c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;c.style.width=w+'px';c.style.maxWidth='100%';c.style.height='auto';c.className='pdf-page';
+      body.appendChild(c);
+      return pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
+    });});}
+    for(var n=1;n<=pdf.numPages;n++){add(n);}
+    return chain;
+  }).catch(function(){body.innerHTML='<div class="empty">This PDF could not be shown.</div>';});
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeReader();});
+function docsHtml(p){
+  p.docs=p.docs||[];
+  if(!p.docs.length&&!editing)return '';
+  var h='<div class="docs"><div class="kicker">Documents</div>';
+  p.docs.forEach(function(d,k){
+    h+='<div class="doc"><div class="doc-ic">PDF</div><div><div class="doc-t">'+(editing?editable(d.title,'doc:'+k+':title','Document title'):esc(d.title))+'</div>';
+    h+=editing?'<textarea data-f="doc:'+k+':desc" rows="3" aria-label="Document description" style="min-height:80px;margin-top:8px">'+esc(d.desc)+'</textarea>':(d.desc?'<p>'+esc(d.desc)+'</p>':'');
+    h+='<div class="tools"><button class="open-pdf" data-act="read-pdf" data-id="'+esc(d.id)+'">Open PDF</button>';
+    if(editing){h+='<button class="sm" data-act="doc-mv" data-k="'+k+'" data-d="-1">Up</button><button class="sm" data-act="doc-mv" data-k="'+k+'" data-d="1">Down</button><button class="sm danger" data-act="rm-doc" data-k="'+k+'">Remove</button>';}
+    h+='</div></div></div>';
+  });
+  if(editing){h+='<button class="add" data-act="add-pdf">+ Add PDF</button>';}
+  return h+'</div>';
+}
+function renderProject(i){
+  var p=S.projects[i];
+  var h='<header class="top"><button class="brand" data-act="back">'+esc(S.name)+'</button><nav class="nav"><button data-act="nav" data-to="projects">Projects</button><button data-act="nav" data-to="about">About</button></nav></header><main>';
+  h+='<div style="padding-top:28px"><button class="back" data-act="back">Back to projects</button></div>';
+  h+='<div class="pv-head"><div><div class="kicker">Project '+pad(i+1)+' of '+pad(S.projects.length)+'</div><h1>'+(editing?editable(p.title,'p:'+p.id+':title','Project title'):esc(p.title))+'</h1></div><div>';
+  h+='<div class="kicker" style="margin-bottom:12px">'+(editing?editable(p.type,'p:'+p.id+':type','Type or studio')+' / '+editable(p.year,'p:'+p.id+':year','Year'):esc([p.type,p.year].filter(Boolean).join('  /  ')))+'</div>';
+  h+=editing?'<textarea data-f="p:'+p.id+':desc" rows="6" aria-label="Project description">'+esc(p.desc)+'</textarea>':'<p>'+esc(p.desc)+'</p>';
+  h+='</div></div>';
+  h+=docsHtml(p);
+  h+='<div class="figs">';
+  p.images.forEach(function(id,k){
+    h+='<figure class="fig" style="margin:0"><img src="'+esc(src(id))+'" alt="'+esc(p.title)+', image '+(k+1)+'" decoding="async"><figcaption class="fc"><span>Fig. '+pad(k+1)+(p.cover===id?'  /  cover':'')+'</span>';
+    if(editing){h+='<span class="tools" style="padding:0"><button class="sm" data-act="img-mv" data-k="'+k+'" data-d="-1">Up</button><button class="sm" data-act="img-mv" data-k="'+k+'" data-d="1">Down</button><button class="sm" data-act="mk-cover" data-k="'+k+'">Make cover</button><button class="sm danger" data-act="rm-img" data-k="'+k+'">Remove</button></span>';}
+    h+='</figcaption></figure>';
+  });
+  if(!p.images.length&&!editing){h+='<div class="empty">Images for this project are coming soon.</div>';}
+  if(editing){h+='<button class="add" data-act="add-imgs">+ Add images</button>';}
+  h+='</div>';
+  var prev=S.projects[i-1],next=S.projects[i+1];
+  h+='<div class="pager"><button data-act="open" data-id="'+(prev?prev.id:'')+'" '+(prev?'':'hidden')+'>&larr; '+esc(prev?prev.title:'')+'</button><button data-act="open" data-id="'+(next?next.id:'')+'" '+(next?'':'hidden')+'>'+esc(next?next.title:'')+' &rarr;</button></div></main>';
+  return h;
+}
+
+function render(keepScroll){
+  var y=window.scrollY;
+  var i=view?find(view):-1;
+  if(view&&i<0){view=null;}
+  document.title=(S.name||TITLE)+' | Portfolio';
+  app.innerHTML='<div class="wrap">'+(view?renderProject(i):renderHome())+'</div>';
+  if(editing){
+    document.body.classList.add('is-editing');
+    var b=document.getElementById('editbar');if(b)b.remove();
+    var bar=document.createElement('div');bar.id='editbar';bar.className='bar';
+    bar.innerHTML='<span id="savestate">'+(dirty?'Unsaved changes':'Editing. Changes are not live until you save.')+'</span><button data-act="discard">Discard</button><button class="go" id="savebtn" data-act="save" '+(dirty?'':'disabled')+'>'+(saving?'Saving...':'Save changes')+'</button>';
+    document.body.appendChild(bar);
+  }else{
+    document.body.classList.remove('is-editing');
+    var o=document.getElementById('editbar');if(o)o.remove();
+  }
+  if(keepScroll){window.scrollTo(0,y);}else{window.scrollTo(0,0);}
+}
+
+function pick(multi,accept){
+  return new Promise(function(res){
+    fileIn.accept=accept||'image/png,image/jpeg,image/webp,image/gif';fileIn.multiple=!!multi;fileIn.value='';
+    fileIn.onchange=function(){res(Array.prototype.slice.call(fileIn.files||[]));};
+    fileIn.click();
+  });
+}
+function upload(file){
+  if(!api.assets){toast('Image upload is not available in this view.');return Promise.resolve(null);}
+  return api.assets.upload(file).then(function(r){return r.id;}).catch(function(e){
+    var c=e&&e.code;
+    toast(c==='too_large'?'That image is over 20 MB. Export a smaller one.':c==='unsupported_type'?'Use a JPG, PNG, WebP or GIF image.':'Upload failed. Try again.');
+    return null;
+  });
+}
+function uploadMany(files){
+  toast('Uploading '+files.length+' image'+(files.length>1?'s':'')+'...');
+  var out=[];
+  return files.reduce(function(chain,f){return chain.then(function(){return upload(f).then(function(id){if(id)out.push(id);});});},Promise.resolve()).then(function(){return out;});
+}
+
+function save(){
+  if(saving||!api.artifact)return;
+  saving=true;render(true);
+  var css=document.getElementById('site-css').textContent;
+  var js=document.getElementById('app-js').textContent;
+  var rs=document.head.querySelector('style');
+  var reset=(rs&&/safe-area/.test(rs.textContent))?rs.textContent:DEFAULT_RESET;
+  var json=JSON.stringify(S).replace(/</g,'\\u003c');
+  var fonts=document.querySelector('link[rel="stylesheet"]');
+  var html='<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>'+reset+'</style></head><body>'
+    +'<title>'+TITLE+'</title>\n<meta name="claude:viewport-fit-sides" content="cover">\n<style id="site-css">'+css+'</style>\n'
+    +(fonts?'<link rel="stylesheet" href="'+fonts.getAttribute('href')+'">\n':'')
+    +'<div id="app"></div>\n<input type="file" id="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>\n'
+    +'<script type="application/json" id="site-data">'+json+'<\/script>\n<script id="app-js">'+js+'<\/script></body></html>';
+  try{sessionStorage.setItem('pf-edit','1');}catch(e){}
+  api.artifact.publish(html).then(function(){dirty=false;},function(e){
+    saving=false;
+    var c=e&&e.code;
+    toast(c==='conflict'?'Someone saved first. Reloading with their version.':c==='not_writer'||c==='not_granted'?'You do not have permission to save this page.':c==='too_large'?'The page is too large to save. Remove some images.':'Save failed. Try again.');
+    render(true);
+  });
+}
+
+function setField(f,v){
+  var p=f.split(':');
+  if(f==='name'){S.name=v;}
+  else if(f==='tagline'){S.tagline=v;}
+  else if(f==='about'){S.about=v;}
+  else if(p[0]==='d'){var d=S.details[+p[1]];if(d)d[p[2]]=v;}
+  else if(p[0]==='p'){var i=find(p[1]);if(i>=0)S.projects[i][p[2]]=v;}
+  else if(p[0]==='doc'){var pr=S.projects[find(view)];if(pr&&pr.docs&&pr.docs[+p[1]])pr.docs[+p[1]][p[2]]=v;}
+  mark();
+}
+app.addEventListener('input',function(e){
+  var t=e.target;if(!t.dataset||!t.dataset.f)return;
+  setField(t.dataset.f,t.isContentEditable?t.textContent:t.value);
+});
+app.addEventListener('keydown',function(e){
+  var t=e.target;
+  if(e.key==='Enter'&&t.isContentEditable){e.preventDefault();return;}
+  if((e.key==='Enter'||e.key===' ')&&t.dataset&&t.dataset.act==='open'&&t.getAttribute('role')==='button'){e.preventDefault();t.click();}
+});
+
+document.addEventListener('click',function(e){
+  var el=e.target.closest?e.target.closest('[data-act]'):null;if(!el)return;
+  var act=el.dataset.act,id=el.dataset.id,i;
+  if(act==='nav'){
+    var go=function(){var s=document.getElementById(el.dataset.to);if(s)s.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'});};
+    if(view){view=null;render();setTimeout(go,30);}else{go();}
+  }
+  else if(act==='top'){window.scrollTo({top:0,behavior:'smooth'});}
+  else if(act==='open'){if(id){view=id;render();}}
+  else if(act==='back'){view=null;render();var s=document.getElementById('projects');if(s)s.scrollIntoView();}
+  else if(act==='edit-on'){editing=true;render(true);}
+  else if(act==='discard'){
+    if(dirty&&!el.dataset.armed){el.dataset.armed='1';el.textContent='Discard all changes?';return;}
+    S=JSON.parse(ORIG);dirty=false;editing=false;try{sessionStorage.removeItem('pf-edit');}catch(x){}render(true);
+  }
+  else if(act==='save'){save();}
+  else if(act==='mv'){i=find(id);var j=i+(+el.dataset.d);if(i>=0&&j>=0&&j<S.projects.length){var t=S.projects[i];S.projects[i]=S.projects[j];S.projects[j]=t;mark();render(true);}}
+  else if(act==='del'){
+    if(!el.dataset.armed){el.dataset.armed='1';el.textContent='Confirm delete';return;}
+    i=find(id);if(i>=0){S.projects.splice(i,1);mark();render(true);}
+  }
+  else if(act==='add-project'){S.projects.push({id:uid(),title:'New project',type:'',year:String(new Date().getFullYear()),desc:'',cover:'',images:[]});mark();render(true);}
+  else if(act==='cover'){pick(false).then(function(fs){if(!fs.length)return;uploadMany(fs).then(function(ids){if(!ids.length)return;var p=S.projects[find(id)];p.cover=ids[0];if(p.images.indexOf(ids[0])<0)p.images.unshift(ids[0]);mark();render(true);});});}
+  else if(act==='about-img'){pick(false).then(function(fs){if(!fs.length)return;uploadMany(fs).then(function(ids){if(ids.length){S.aboutImg=ids[0];mark();render(true);}});});}
+  else if(act==='add-imgs'){pick(true).then(function(fs){if(!fs.length)return;uploadMany(fs).then(function(ids){if(!ids.length)return;var p=S.projects[find(view)];ids.forEach(function(x){p.images.push(x);});if(!p.cover)p.cover=ids[0];mark();render(true);});});}
+  else if(act==='rm-img'){
+    if(!el.dataset.armed){el.dataset.armed='1';el.textContent='Confirm';return;}
+    var p=S.projects[find(view)],k=+el.dataset.k,rid=p.images[k];p.images.splice(k,1);if(p.cover===rid)p.cover=p.images[0]||'';mark();render(true);
+  }
+  else if(act==='img-mv'){var q=S.projects[find(view)],a=+el.dataset.k,b=a+(+el.dataset.d);if(b>=0&&b<q.images.length){var tmp=q.images[a];q.images[a]=q.images[b];q.images[b]=tmp;mark();render(true);}}
+  else if(act==='mk-cover'){var r=S.projects[find(view)];r.cover=r.images[+el.dataset.k];mark();render(true);}
+  else if(act==='read-pdf'){var dt=el.closest('.doc');openReader(id,dt?dt.querySelector('.doc-t').textContent:'');}
+  else if(act==='close-reader'){closeReader();}
+  else if(act==='add-pdf'){pick(true,'application/pdf').then(function(fs){if(!fs.length)return;uploadMany(fs).then(function(ids){if(!ids.length)return;var p=S.projects[find(view)];p.docs=p.docs||[];ids.forEach(function(x,n){p.docs.push({id:x,title:(fs[n]&&fs[n].name?fs[n].name.replace(/\.pdf$/i,''):'Document'),desc:''});});mark();render(true);});});}
+  else if(act==='rm-doc'){if(!el.dataset.armed){el.dataset.armed='1';el.textContent='Confirm';return;}var pd=S.projects[find(view)];pd.docs.splice(+el.dataset.k,1);mark();render(true);}
+  else if(act==='doc-mv'){var pm=S.projects[find(view)],a2=+el.dataset.k,b2=a2+(+el.dataset.d);if(b2>=0&&b2<pm.docs.length){var tm=pm.docs[a2];pm.docs[a2]=pm.docs[b2];pm.docs[b2]=tm;mark();render(true);}}
+  else if(act==='add-detail'){S.details.push({k:'Label',v:'Details'});mark();render(true);}
+  else if(act==='rm-detail'){S.details.splice(+el.dataset.i,1);mark();render(true);}
+});
+window.addEventListener('beforeunload',function(e){if(dirty&&!saving){e.preventDefault();e.returnValue='';}});
+
+render();
+
+if(window.claude&&window.claude.use){
+  Promise.all([
+    window.claude.use('user').catch(function(){return null;}),
+    window.claude.use('artifact').catch(function(){return null;}),
+    window.claude.use('assets').catch(function(){return null;})
+  ]).then(function(r){
+    api.artifact=r[1];api.assets=r[2];
+    var p=r[0]?r[0].canEdit():Promise.resolve(false);
+    return p.then(function(ok){
+      canEdit=!!(ok&&api.artifact);
+      if(!canEdit){editing=false;try{sessionStorage.removeItem('pf-edit');}catch(e){}}
+      render(true);
+    });
+  }).catch(function(){});
+}else{editing=false;}
+})();
+</script></body></html>
