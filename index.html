@@ -120,7 +120,7 @@ try{ if(sessionStorage.getItem('pf-edit')==='1'){ editing=true; } }catch(e){}
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 var EXT={"3e84db059db5b60ca2a30f9a3dc70167": "jpg", "4eb1b9a6f1497169a825200300dbadcf": "pdf", "7e9148c5bd80b0b60d036aa812e389ca": "jpg", "42928b832af36ba31f80e05cba788054": "jpg", "7d3cca1d792700b7a44ec17dae01cd4a": "jpg", "8a2733fc66ad0c30b995f5949a81f36a": "jpg", "f94072854bc323e50403cee5e4e78659": "jpg", "c390f69126837f778e52b274a3eb0faa": "jpg", "7b513feecbe33090a90c044d08c3879d": "pdf", "3f14cf2c71d777bd8a874d0c72527783": "pdf", "42fd851cc5647ca4b08f062bf2a82f59": "jpg", "15a4469c4abc22a5fa097f41a9f0af3e": "pdf", "3caa586a9a58bb50acebee3d557b2b6b": "jpg", "c488a963b700b6e2a97699eef78b8064": "jpg", "4fda93091e9edf951d25f7e3ffc20dd8": "jpg", "7e7386f59aaced1c6c5432003d0166b5": "pdf"};
-function src(id){return id?'assets/'+id+'.'+(EXT[id]||'jpg'):'';}
+function src(id){return id?id+'.'+(EXT[id]||'jpg'):'';}
 function pad(n){return (n<10?'0':'')+n;}
 function find(id){for(var i=0;i<S.projects.length;i++){if(S.projects[i].id===id)return i;}return -1;}
 function coverOf(p){return p.cover||(p.images&&p.images[0])||'';}
